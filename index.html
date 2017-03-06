@@ -1,13 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="superherosApp">
 <head>
   <meta charset="UTF-8">
   <title>Superheros Phone Book</title>
   <link rel="stylesheet" href="style.css">
-</head>
-<body ng-controller="superherosCtrl as vm">
-  <div ng-repeat="super">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
   <script src="app.js"></script>
-</body>
+  </head>
+
+  <body ng-controller="superherosCtrl as vm">
+    <input type="text" ng-model="search" placeholder="Search"/>
+    <div class="{{superheros.affiliation}}" ng-repeat="superheros in vm.superheros | filter:search">
+      <br>
+      <button type="button" ng-click="image = !image" name="button">Show/Hide Hero</button><br>
+      <img ng-show="image" src={{superheros.photo_url}} height="100%" width="300">
+      <h1>{{$index + 1}}. {{superheros.name}}</h1>
+      <p>{{superheros.phonenumber}}, {{superheros.affiliation}}</p>
+    </div>
+      <div>
+        <input type="text" ng-model="vm.newSuperheros.name" placeholder="Hero Name"><br>
+        <input type="text" ng-model="vm.newSuperheros.phonenumber" placeholder="Phone Number"><br>
+        <input type="text" ng-model="vm.newSuperheros.affiliation" placeholder="Affiliation"><br>
+        <input type="text" ng-model="vm.newSuperheros.photo_url" placeholder="Hero Photo"><br>
+        <button ng-click="vm.addSuperheros()">Add Hero</button>
+        <p>Name: {{vm.newName}}</p>
+        <p>Phone Number: {{vm.newPhoneNumber}}</p>
+        <p>Affiliation: {{vm.newAffiliation}}</p>
+        <p>Image: {{vm.newPhoto}}</p>
+      </div>
+  </body>
 </html>
